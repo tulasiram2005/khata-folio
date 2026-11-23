@@ -13,6 +13,7 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm test
+      - run: npm run test:mongo
       - run: npm audit --audit-level=high
       - name: Browser journeys and accessibility
         run: |

@@ -1,10 +1,81 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17352b"><meta name="description" content="A synthetic Indian shop passbook with double-entry journals and customer statements."><title>Khata Folio · Shop passbook</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head><body>
-<header><a href="/" class="brand">Khata Folio</a><span>Shop passbook</span><small>Synthetic demo</small></header>
-<main><div class="title"><div><p class="kicker">Fictional general store</p><h1 id="heading">Day book</h1></div><p id="summary"></p></div>
-<nav aria-label="Book sections" id="nav" hidden><button>Day book</button><button>Statements</button><button>Reconciliation</button><button>Reports</button></nav>
-<p id="notice" role="status">Opening your synthetic book…</p><button id="retry" hidden>Retry connection</button>
-<div id="layout"><section id="page" aria-label="Book contents"></section><aside id="tray" hidden><p class="kicker">Quick entry</p><h2>Proposal tray</h2>
-<form id="sentence"><label for="phrase">Describe a transaction</label><input id="phrase" maxlength="160" placeholder="Ravi ne 500 udhaar liya"><button>Read phrase</button></form>
-<form id="manual"><label>Entry type<select id="kind"><option>Credit sale</option><option>UPI receipt</option><option>Cash receipt</option><option>Cash sale</option><option>Expense</option><option>Capital</option></select></label><label>Customer<select id="person"></select></label><div class="fields"><label>Amount (₹)<input id="amount" required inputmode="decimal" placeholder="0.00"></label><label>Book date<input id="date" required type="date"></label></div><label>Note<input id="note" maxlength="160" placeholder="Optional"></label><button class="primary">Review entry</button></form>
-<div id="preview" aria-live="polite"></div></aside></div></main><footer>Khata Folio · Fictional books for demonstration. Hosted books reset when the service sleeps.</footer>
-<dialog id="details"><form method="dialog"><button class="dismiss">Close</button></form><div id="detailBody"></div></dialog></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#17352b" />
+    <meta
+      name="description"
+      content="A synthetic Indian shop passbook with double-entry journals and customer statements."
+    />
+    <title>Khata Folio · Shop passbook</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="brand">Khata Folio</a><span>Shop passbook</span
+      ><small>Synthetic demo</small>
+    </header>
+    <main>
+      <div class="title">
+        <div>
+          <p class="kicker">Fictional general store</p>
+          <h1 id="heading">Day book</h1>
+        </div>
+        <p id="summary"></p>
+      </div>
+      <nav aria-label="Book sections" id="nav" hidden>
+        <button>Day book</button><button>Statements</button><button>Reconciliation</button
+        ><button>Reports</button>
+      </nav>
+      <p id="notice" role="status">Opening your synthetic book…</p>
+      <button id="retry" hidden>Retry connection</button>
+      <div id="layout">
+        <section id="page" aria-label="Book contents"></section>
+        <aside id="tray" hidden>
+          <p class="kicker">Quick entry</p>
+          <h2>Proposal tray</h2>
+          <form id="sentence">
+            <label for="phrase">Describe a transaction</label
+            ><input id="phrase" maxlength="160" placeholder="Ravi ne 500 udhaar liya" /><button>
+              Read phrase
+            </button>
+          </form>
+          <form id="manual">
+            <label
+              >Entry type<select id="kind">
+                <option>Credit sale</option>
+                <option>UPI receipt</option>
+                <option>Cash receipt</option>
+                <option>Cash sale</option>
+                <option>Expense</option>
+                <option>Capital</option>
+              </select></label
+            ><label>Customer<select id="person"></select></label>
+            <div class="fields">
+              <label
+                >Amount (₹)<input
+                  id="amount"
+                  required
+                  inputmode="decimal"
+                  placeholder="0.00" /></label
+              ><label>Book date<input id="date" required type="date" /></label>
+            </div>
+            <label>Note<input id="note" maxlength="160" placeholder="Optional" /></label
+            ><button class="primary">Review entry</button>
+          </form>
+          <div id="preview" aria-live="polite"></div>
+        </aside>
+      </div>
+    </main>
+    <footer>
+      Khata Folio · Fictional books for demonstration. Hosted books reset when the service sleeps.
+    </footer>
+    <article id="invoice"></article>
+    <dialog id="details">
+      <form method="dialog"><button class="dismiss">Close</button></form>
+      <div id="detailBody"></div>
+    </dialog>
+  </body>
+</html>
