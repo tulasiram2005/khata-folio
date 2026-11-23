@@ -1,0 +1,24 @@
+{
+  "name": "khata-folio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "start": "node apps/api/server.js",
+    "test": "node --test test/*.test.js",
+    "test:browser": "node test/browser.js"
+  },
+  "dependencies": {
+    "csv-parse": "7.0.3",
+    "express": "5.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "fast-check": "4.11.0",
+    "playwright-core": "1.65.1"
+  }
+}
