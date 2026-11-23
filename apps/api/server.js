@@ -5,7 +5,8 @@ import { createHmac } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { store, hash } from './store.js';
-import { customers, day, proposal, draft, reconcile } from '../../packages/ledger.js';
+import { proposer } from '../../packages/proposer.js';
+import { customers, day, proposal, reconcile } from '../../packages/ledger.js';
 const memberRole = z.enum(['staff', 'accountant']);
 const memberPolicy = {
   staff: new Set(['GET /book', 'POST /draft', 'POST /post', 'POST /reconcile']),
@@ -15,6 +16,7 @@ const id = z.int().positive(),
   note = z.string().trim().min(1).max(160),
   customer = z.enum(customers);
 export function appFor(s, secure = false) {
+  const propose = proposer(process.env.OLLAMA_MODEL);
   const app = express(),
     visits = new Map(),
     publicRoot = fileURLToPath(new URL('../web/', import.meta.url));
@@ -116,9 +118,9 @@ export function appFor(s, secure = false) {
   app.get('/api/book', async (req, res) =>
     res.json({ ...(await s.state(req.shop)), customers, role: req.role }),
   );
-  app.post('/api/draft', (req, res) => {
+  app.post('/api/draft', async (req, res) => {
     const p = z.strictObject({ text: note, date: day }).parse(req.body);
-    res.json(draft(p.text, p.date));
+    res.json(await propose(req.shop, p.text, p.date));
   });
   app.post('/api/reconcile', async (req, res) => {
     const p = z.strictObject({ csv: z.string().min(1).max(50000) }).parse(req.body);

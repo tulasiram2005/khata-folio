@@ -1,3 +1,4 @@
+import { anomalyRows } from './anomalies.js';
 const $ = (id) => document.getElementById(id);
 const money = (n) =>
   new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(n / 100);
@@ -393,6 +394,7 @@ function reports(page) {
     'Balance sheet',
     'Daily cash book',
     'Receivables ageing',
+    'Anomaly flags',
   ];
   page.append(
     field(
@@ -404,6 +406,10 @@ function reports(page) {
     ),
   );
   let headers, rows;
+  if (report === 'Anomaly flags') {
+    headers = ['Entry', 'Flag', 'Reason'];
+    rows = anomalyRows(book.entries);
+  }
   if (report === 'Trial balance') {
     headers = ['Account', 'Debit (₹)', 'Credit (₹)'];
     rows = names.map((a) => [a, Math.max(0, net[a] || 0) / 100, Math.max(0, -(net[a] || 0)) / 100]);
@@ -481,7 +487,9 @@ function reports(page) {
       headers.slice(1).map((_, i) => i + 1),
     ),
   );
-  if (!rows.length)
+  if (!rows.length && report === 'Anomaly flags')
+    page.append(el('p', 'No entries crossed the review thresholds.'));
+  if (!rows.length && report !== 'Anomaly flags')
     page.append(
       el('p', 'No cash movements yet. Post a cash receipt or expense to populate this report.'),
     );

@@ -1,0 +1,1 @@
+The deployed app uses Node, Express, Zod, browser JavaScript and SQLite. MongoDB is available as a separately tested storage adapter. The hosted runtime has no live commercial model, payment gateway, cloud email, Redis, Sentry or R2 integration. React, TypeScript, Mongoose and automated tax filing are outside the current implementation.

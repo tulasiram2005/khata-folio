@@ -100,3 +100,13 @@ test('two receipts of the same customer match one credit and fuzzy names carry l
   assert.equal(results[1].match, null);
   assert.equal(reconcile('date,amount,narration\n2026-11-24,123.45,Ravii', [e])[0].match.score, 90);
 });
+test('anomaly review identifies duplicate, robust outlier and round-number reasons', async () => {
+  const { anomalyRows } = await import('../apps/web/anomalies.js');
+  const entries = [100, 110, 120, 130, 140, 100000, 100000]
+    .map((amount, i) => ({ ...pair({ ...p, amount }), id: i + 1 }))
+    .reverse();
+  assert.deepEqual(
+    new Set(anomalyRows(entries).map((r) => r[1])),
+    new Set(['Possible duplicate', 'Unusually large', 'Round-number spike']),
+  );
+});
